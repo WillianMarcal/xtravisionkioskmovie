@@ -48,7 +48,7 @@ public class RentService {
         
         validate(rent);
         
-        movieService.increaseById(rent.getMovieId());
+        movieService.decreaseById(rent.getMovieId());
         
         return rentRepository.save(rent);
     }
@@ -59,7 +59,7 @@ public class RentService {
         }
         Rent rent = rentRepository.findById(id);
         
-        movieService.decreaseById(rent.getMovieId());
+        movieService.increaseById(rent.getMovieId());
         
         return rentRepository.deleteById(id);
     }

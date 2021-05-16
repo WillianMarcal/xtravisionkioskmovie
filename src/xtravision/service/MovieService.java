@@ -40,7 +40,7 @@ public class MovieService {
         return movieRepository.save(movie);
     }
     
-    public void increaseById(Integer id) {
+    public void decreaseById(Integer id) {
         Movie movie = findById(id);
         
         int newMovieQuantity = movie.getQuantity() - 1;
@@ -51,7 +51,7 @@ public class MovieService {
         movieRepository.updateQuantity(id, newMovieQuantity);
     }
     
-    public void decreaseById(Integer id) {
+    public void increaseById(Integer id) {
         Movie movie = findById(id);
         
         int newMovieQuantity = movie.getQuantity() + 1;
