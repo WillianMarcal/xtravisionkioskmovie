@@ -11,7 +11,7 @@ import xtravision.data.repositories.RentRepository;
 import xtravision.utils.StringUtils;
 
 /**
- *
+ *RentService:Class that concentrates all as business rules of a lease.
  * @author Tiago
  */
 public class RentService {
@@ -24,7 +24,10 @@ public class RentService {
         this.rentRepository = new RentRepository();
         this.movieService = new MovieService();
     }
-    
+    /**
+     * listAll: Returns all records.
+     * @return 
+     */
     public List<Rent> listAll() {
         List<Rent> rents = rentRepository.listAll();
         rents.forEach(rent -> {
@@ -32,7 +35,11 @@ public class RentService {
         });
         return rents;
     }
-    
+    /**
+     * findById: Returns the record containing the specified ID.
+     * @param id
+     * @return 
+     */
     public Rent findById(Integer id) {
         if (id == null) {
             throw new RuntimeException("Rent Id is required");
@@ -43,7 +50,11 @@ public class RentService {
         
         return rent;
     }
-    
+    /**
+     * save: Validates the informed rent, decreases the amount of the film and saves the record.
+     * @param rent
+     * @return 
+     */
     public boolean save(Rent rent) {
         
         validate(rent);
@@ -52,7 +63,11 @@ public class RentService {
         
         return rentRepository.save(rent);
     }
-    
+    /**
+     * deleteById: Deletes a location that contains the specified ID and increases the available amount of the movie
+     * @param id
+     * @return 
+     */
     public boolean deleteById(Integer id) {
         if (id == null) {
             throw new RuntimeException("Rent Id is required");
@@ -63,7 +78,10 @@ public class RentService {
         
         return rentRepository.deleteById(id);
     }
-
+       /**
+        * validate: Validates whether the rent is valid to be saved.
+        * @param rent 
+        */
     private void validate(Rent rent) {
         StringBuilder errors = new StringBuilder();
         if (rent.getMovieId() == null) {

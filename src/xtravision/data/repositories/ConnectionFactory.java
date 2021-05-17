@@ -12,11 +12,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ *ConnectonsFactory:Factory of connections to the database.
  * @author Willian
  */
 public class ConnectionFactory {
-    
+    /**
+     * getConnection:Returns an active connection to the database
+     * @return 
+     */
     public static Connection getConnection() {
         Connection connection = null;
         try {

@@ -11,7 +11,7 @@ import xtravision.data.repositories.MovieRepository;
 import xtravision.utils.StringUtils;
 
 /**
- *
+ *MovieService: Class that concentrates all the business rules of a movie.
  * @author Willian
  */
 public class MovieService {
@@ -21,25 +21,39 @@ public class MovieService {
     public MovieService() {
         this.movieRepository = new MovieRepository();
     }
-    
+    /**
+     * listAll: Returns all records.
+     * @return 
+     */
     public List<Movie> listAll() {
         return movieRepository.listAll();
     }
-    
+    /**
+     * findById: Returns the record containing the specified ID.
+     * @param id
+     * @return 
+     */
     public Movie findById(Integer id) {
         if (id == null) {
             throw new RuntimeException("Movie Id is required");
         }
         return movieRepository.findById(id);
     }
-    
+    /**
+     * save: Validates the informed movie and saves the record.
+     * @param movie
+     * @return 
+     */
     public boolean save(Movie movie) {
         
         validate(movie);
         
         return movieRepository.save(movie);
     }
-    
+    /**
+     * decreaseById: Decreases the available quantity of the movie with the specified ID.
+     * @param id 
+     */
     public void decreaseById(Integer id) {
         Movie movie = findById(id);
         
@@ -50,7 +64,10 @@ public class MovieService {
         }
         movieRepository.updateQuantity(id, newMovieQuantity);
     }
-    
+    /**
+     * increaseByld: Increments the available quantity of the movie with the specified ID.
+     * @param id 
+     */
     public void increaseById(Integer id) {
         Movie movie = findById(id);
         
@@ -58,7 +75,10 @@ public class MovieService {
         
         movieRepository.updateQuantity(id, newMovieQuantity);
     }
-    
+    /**
+     * validate: Validates whether the movie is valid for saving.
+     * @param movie 
+     */
     private void validate(Movie movie) {
         StringBuilder errors = new StringBuilder();
         if (StringUtils.isNotBlank(movie.getName())) {

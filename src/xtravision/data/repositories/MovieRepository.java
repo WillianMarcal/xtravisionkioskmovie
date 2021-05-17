@@ -18,11 +18,16 @@ import xtravision.view.RentHomeScreenForm;
 import xtravision.data.dtos.Movie;
 
 /**
- *
+ * Movie data repository responsible for concentrating
+ *manipulations with the database for the table:Movie.
+ * 
  * @author Willian
  */
 public class MovieRepository {
-    
+    /**
+     * listAll:Returns all record.
+     * @return 
+     */
     public List<Movie> listAll() {
         List<Movie> movies = new ArrayList<>();
         
@@ -45,7 +50,11 @@ public class MovieRepository {
         }
         return movies;
     }
-    
+    /**
+     * findById: Returns the record containing the specified ID.
+     * @param id
+     * @return 
+     */
     public Movie findById(Integer id) {
         Movie movie = null;
         String sql = "select * from [Movie] where id = :id";
@@ -68,7 +77,11 @@ public class MovieRepository {
         }
         return movie;
     }
- 
+ /**
+  * Save: Saves the record.
+  * @param movie
+  * @return 
+  */
     public boolean save(Movie movie) {
         
         try (Connection connection = ConnectionFactory.getConnection(); 
@@ -87,7 +100,11 @@ public class MovieRepository {
             throw new RuntimeException("Error on saving the movie", ex);
         }
     }
-    
+    /**
+     * UpdateQuantity:updates the number of movies available.
+     * @param id
+     * @param quantity 
+     */
     public void updateQuantity(Integer id, Integer quantity) {
         
         try (Connection connection = ConnectionFactory.getConnection(); 

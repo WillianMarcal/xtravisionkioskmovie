@@ -19,11 +19,16 @@ import xtravision.data.dtos.Customer;
 import xtravision.data.dtos.Rent;
 
 /**
- *
+ *Location data repository:Responsible for concentrating manipulations with
+ * the database for the table movie_record.
  * @author Tiago
  */
 public class RentRepository {
  
+    /**
+     * listAll:Returns all record
+     * @return 
+     */
     public List<Rent> listAll() {
         List<Rent> rents = new ArrayList<>();
         
@@ -48,7 +53,11 @@ public class RentRepository {
         }
         return rents;
     }
-    
+    /**
+     * Return the records containing the specified ID.
+     * @param id
+     * @return 
+     */
     public Rent findById(Integer id) {
         Rent rent = null;
         
@@ -70,7 +79,11 @@ public class RentRepository {
         }
         return rent;
     }
-    
+    /**
+     * Save:Saves the Record.
+     * @param rent
+     * @return 
+     */
     public boolean save(Rent rent) {
         
         try (Connection connection = ConnectionFactory.getConnection(); 
@@ -89,7 +102,11 @@ public class RentRepository {
             throw new RuntimeException("Error on saving the rent", ex);
         }
     }
-    
+    /**
+     * deleteById: Deletes the location containing the specified ID and increases the available quantity of the movie.
+     * @param id
+     * @return 
+     */
     public boolean deleteById(Integer id) {
         
         String sql = "DELETE FROM movie_record WHERE record_no = :id";
@@ -107,7 +124,11 @@ public class RentRepository {
             throw new RuntimeException("Error on Deleting a rent by id", ex);
         }
     }
-    
+    /**
+     * toBoolean:Convert the given string value to boolean.
+     * @param value
+     * @return 
+     */
     private boolean toBoolean(String value) {
         try {
             return Boolean.parseBoolean(value);
